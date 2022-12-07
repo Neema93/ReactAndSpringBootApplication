@@ -12,7 +12,7 @@ class Counter extends Component {
         return (
             <div className='counter'>
                 <button onClick={this.increment}>+1</button>
-                <span className='count'>{this.state.counter}</span>
+                <span className='count' style={{fontSize:  '50px'}}>{this.state.counter}</span>
             </div>
         )
     }
