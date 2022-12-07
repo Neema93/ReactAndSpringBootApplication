@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App">
      My Hello World.
-     <Counter by={1}></Counter>
+     <Counter></Counter>
      <Counter by={5}></Counter>
      <Counter by={10}></Counter>
     </div>

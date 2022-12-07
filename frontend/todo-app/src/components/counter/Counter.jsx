@@ -27,4 +27,7 @@ class Counter extends Component {
         );
     }
 }
+Counter.defaultProps = {
+    by : 1
+}
 export default Counter;
