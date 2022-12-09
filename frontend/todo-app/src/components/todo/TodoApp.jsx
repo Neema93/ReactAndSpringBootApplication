@@ -3,26 +3,27 @@ import { BrowserRouter as Router, Route, Routes,Link } from 'react-router-dom'
 import withNavigation from './WithNavigation'
 import withParams from './WithParams';
 import AuthenticationService from './AuthenticationService.js';
+import AuthenticatedRoute from './AuthenticateRoute';
 
 class TodoApp extends Component {
 
     render() {
         const LoginComponentWithNavigation = withNavigation(LoginComponent);
         const WelcomeComponentWithParams = withParams(WelcomeComponent);
-
+        const HeaderComponentWithNavigation = withNavigation(HeaderComponent);
         return (
             <div className='TddoApp'>
                 <Router>
-                <HeaderComponent />
+                <HeaderComponentWithNavigation />
                     <Routes>
                         
                         <Route path="/" element={<LoginComponentWithNavigation />} />
                         <Route path="/login" element={<LoginComponentWithNavigation />} />
                         {/* <Route path="/login" element={<LoginComponent/>} /> */}
-                        <Route path="/welcome/:name" element={<WelcomeComponentWithParams />} />
-                        <Route path="/todos" element={<ListTodosComponent />} />
+                        <AuthenticatedRoute path="/welcome/:name" element={<WelcomeComponentWithParams />} />
+                        <AuthenticatedRoute path="/todos" element={<ListTodosComponent />} />
                         <Route path="*" element={<ErrorComponent />} />
-                        <Route path="/logout" element={<LogoutComponent/>} />
+                        <AuthenticatedRoute path="/logout" element={<LogoutComponent/>} />
                       
                     </Routes>
                     <FooterComponent />
@@ -33,24 +34,24 @@ class TodoApp extends Component {
     }
 }
 class HeaderComponent extends Component{
-    render(){
-       // const isUserLoggedIn = AuthenticationService.isUserLoggedIn();
+    render() {
+        const isUserLoggedIn = AuthenticationService.isUserLoggedIn();
         //console.log(isUserLoggedIn);
 
         return (
             <header>
-                <nav className="navbar navbar-expand-md navbar-dark bg-dark">
-                   
-                    <ul className="navbar-nav">
-                        <li><Link className="nav-link" to="/welcome/Neema">Home</Link></li>
-                     <li><Link className="nav-link" to="/todos">Todos</Link></li>
-                    </ul>
-                    <ul className="navbar-nav navbar-collapse justify-content-end">
-                        <li><Link className="nav-link" to="/login">Login</Link></li>
-                        <li><Link className="nav-link" to="/logout" onClick={AuthenticationService.logout}>Logout</Link></li>
-                    </ul>
-                </nav>
-            </header>
+            <nav className="navbar navbar-expand-md navbar-dark bg-dark">
+                <div><a href="http://www.in28minutes.com" className="navbar-brand">in28Minutes</a></div>
+                <ul className="navbar-nav">
+                    {isUserLoggedIn && <li><Link className="nav-link" to="/welcome/in28minutes">Home</Link></li>}
+                    {isUserLoggedIn && <li><Link className="nav-link" to="/todos">Todos</Link></li>}
+                </ul>
+                <ul className="navbar-nav navbar-collapse justify-content-end">
+                    {!isUserLoggedIn && <li><Link className="nav-link" to="/login">Login</Link></li>}
+                    {isUserLoggedIn && <li><Link className="nav-link" to="/logout" onClick={AuthenticationService.logout}>Logout</Link></li>}
+                </ul>
+            </nav>
+        </header>
         )
     }
 }
