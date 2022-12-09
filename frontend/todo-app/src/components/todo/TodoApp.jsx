@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Routes,Link } from 'react-router-dom'
 import withNavigation from './WithNavigation'
 import withParams from './WithParams';
+import AuthenticationService from './AuthenticationService.js';
 
 class TodoApp extends Component {
 
@@ -46,7 +47,7 @@ class HeaderComponent extends Component{
                     </ul>
                     <ul className="navbar-nav navbar-collapse justify-content-end">
                         <li><Link className="nav-link" to="/login">Login</Link></li>
-                        <li><Link className="nav-link" to="/logout" >Logout</Link></li>
+                        <li><Link className="nav-link" to="/logout" onClick={AuthenticationService.logout}>Logout</Link></li>
                     </ul>
                 </nav>
             </header>
@@ -150,6 +151,7 @@ class LoginComponent extends Component {
 
     loginClicked() {
         if (this.state.username === 'Neema' && this.state.password === '123') {
+            AuthenticationService.registerSuccessfullLogin(this.state.username,this.state.password);
             this.props.navigate(`/welcome/${this.state.username}`)
             // this.setState({ showSuccessMessage: true })
             // this.setState({ hasLoginFailed: false })
