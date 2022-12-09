@@ -90,10 +90,11 @@ class ListTodosComponent extends Component {
         return (
             <>
                 <h1>List Todos</h1>
-                <table>
+                <div className='container'>
+                <table className='table'>
                     <thead>
                         <tr>
-                            <th>Id</th>
+                            
                             <th>Description</th>
                             <th>Done</th>
                             <th>TargetDate</th>
@@ -102,7 +103,6 @@ class ListTodosComponent extends Component {
                     <tbody>
                         {this.state.todos.map(todo => 
                         <tr key={todo.id}>
-                            <td>{todo.id}</td>
                             <td>{todo.description}</td>
                             <td>{todo.done.toString()}</td>
                             <td>{todo.targetDate.toString()}</td>
@@ -111,7 +111,7 @@ class ListTodosComponent extends Component {
 
                     </tbody>
                 </table>
-
+                </div>
             </>
         )
     }
@@ -120,7 +120,8 @@ class WelcomeComponent extends Component {
     render() {
         return (
             <>
-                <div>Welcome {this.props.params.name}. You can manage your todos <Link to="/todos">here</Link>.</div>
+            <h1>Welcome!</h1>
+                <div className='container'>Welcome {this.props.params.name}. You can manage your todos <Link to="/todos">here</Link>.</div>
             </>
         )
     }
@@ -163,11 +164,14 @@ class LoginComponent extends Component {
     render() {
         return (
             <div className='LoginComponent'>
-                {this.state.hasLoginFailed && <div>Invalid Credentials</div>}
+                <h1>Login</h1>
+                <div className='container' >
+                {this.state.hasLoginFailed && <div className='alert alert-warning'>Invalid Credentials</div>}
                 {this.state.showSuccessMessage && <div>Login Success</div>}
                 UserName: <input type="text" name="username" value={this.state.username} onChange={this.handleChange} />
                 Password: <input type="password" name="password" value={this.state.password} onChange={this.handleChange} />
-                <button type="submit" onClick={this.loginClicked}>Login</button>
+                <button className='btn btn-success' type="submit" onClick={this.loginClicked}>Login</button>
+                </div>
             </div>
         )
     }
