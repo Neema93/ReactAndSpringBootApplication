@@ -26,13 +26,13 @@ class TodoComponent extends Component {
             return
         }
 
-       //let username = AuthenticationService.getLoggedInUserName()
+       let username = AuthenticationService.getLoggedInUserName()
 
-        // TodoDataService.retrieveTodo(username, this.state.id)
-        //     .then(response => this.setState({
-        //         description: response.data.description,
-        //         targetDate: moment(response.data.targetDate).format('YYYY-MM-DD')
-        //     }))
+        TodoDataService.retrieveTodo(username, this.state.id)
+            .then(response => this.setState({
+                description: response.data.description,
+                targetDate: moment(response.data.targetDate).format('YYYY-MM-DD')
+            }))
     }
 
     validate(values) {

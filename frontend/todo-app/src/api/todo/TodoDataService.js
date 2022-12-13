@@ -1,7 +1,10 @@
 import axios from 'axios'
 class TodoDataService {
     retriveAllTodos(Name) {
-        return axios.get(`http://localhost:8080/Users/${Name}/todos`);
+        return axios.get(`http://localhost:8080/users/${Name}/todos`);
+    }
+    retrieveTodo(name,id) {
+        return axios.get(`http://localhost:8080/users/${name}/todos/${id}`);
     }
     deleteTodo(name,id){
         console.log(id+" " +name)

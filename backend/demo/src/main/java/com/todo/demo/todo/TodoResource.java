@@ -15,9 +15,13 @@ public class TodoResource {
    @Autowired
    private TodoHardCodedService service;
 
-   @GetMapping("/Users/{username}/todos")
+   @GetMapping("/users/{username}/todos")
    public List<Todo> getAllTodos(@PathVariable String username) {
       return service.findAll();
+   }
+   @GetMapping("/users/{username}/todos/{id}")
+   public Todo getTodos(@PathVariable String username,@PathVariable long id) {
+      return service.findById(id);
    }
    @DeleteMapping("users/{name}/todos/{id}")
    public ResponseEntity<Void> deleteTodo(@PathVariable String name,@PathVariable long id){
