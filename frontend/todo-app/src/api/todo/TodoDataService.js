@@ -18,7 +18,7 @@ class TodoDataService {
     }
     createTodo(name,id,todo){
         console.log(id+" " +name)
-         let res =  axios.post(`http://localhost:8080/users/${name}/todos/`, todo);
+         let res =  axios.post(`http://localhost:8080/users/${name}/todos`, todo);
          return res;
     }
 }
